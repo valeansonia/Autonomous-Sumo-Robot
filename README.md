@@ -31,7 +31,7 @@ The robot runs on a real-time **State Machine** written in **C++/AVR**:
 ## Team & Contribution
 This project was developed in a team of 4 for the **BattleLab Robotica** competition.
 - **Collaborative Effort:** We worked together on all stages: soldering components, calibrating sensors, and refining the combat strategy.
-- **My Involvement:** I was deeply involved in both the **hardware assembly** and the **autonomous logic implementation**, ensuring the software correctly interpreted sensor data to control the high-torque motors.
+- **My Involvement:** I was involved in both the **hardware assembly** and the **autonomous logic implementation**, ensuring the software correctly interpreted sensor data to control the high-torque motors.
 
 ---
 *Note: The original source code from the competition is archived. This documentation serves as a technical overview of the architecture and logic developed for the event.*
