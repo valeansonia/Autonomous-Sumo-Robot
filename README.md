@@ -9,24 +9,24 @@ The goal was to create a robust, fast, and intelligent robot capable of autonomo
 To build the Sumo robot, we used a combination of high-torque mechanical parts and precise electronic sensors:
 
 ### Core Electronics
-- **Microcontroller:** Arduino Nano / ATmega328P (selected for its small footprint and reliability).
-- **Motor Driver:** L298N or TB6612FNG Dual H-Bridge (to handle high current for the DC motors).
-- **Sensors (Opponent):** 2x Sharp IR Distance Sensors or Ultrasonic Sensors for long-range detection (the "eyes").
-- **Sensors (Line):** 2x TCRT5000 Infrared Reflectance sensors placed under the blade for edge detection.
-- **Power:** 2S or 3S LiPo Battery to ensure high discharge rates for rapid acceleration.
+- **Microcontroller:** Arduino Nano (ATmega328P) - chosen for its small footprint and reliable processing.
+- **Motor Driver:** TB6612FNG Dual H-Bridge - used for high-efficiency current handling for the DC motors.
+- **Sensors (Opponent):** 2x Sharp IR Distance Sensors - for high-speed, long-range opponent detection (the "eyes").
+- **Sensors (Line):** 2x TCRT5000 Infrared Reflectance sensors - mounted under the blade for millisecond edge detection.
+- **Power:** 3S LiPo Battery - to provide the high discharge rates required for rapid acceleration.
 
 ### Mechanical Parts
-- **Chassis:** Custom laser-cut acrylic or 3D printed frame for a low profile.
-- **Magnetic Downforce:** Neodymium N52 magnets for maximum adhesion to the metal ring (Dohyo), increasing traction.
-- **Motors:** 2x High-torque DC Gear Motors (approx. 500-1000 RPM).
-- **Wheels:** High-friction silicone or rubber wheels for maximum grip.
+- **Chassis:** Custom laser-cut acrylic frame designed for a low profile and high structural integrity.
+- **Magnetic Downforce:** Neodymium N52 magnets - strategically placed for maximum adhesion to the metal ring (Dohyo).
+- **Motors:** 2x High-torque DC Gear Motors (600 RPM) - balanced for both speed and pushing force.
+- **Wheels:** High-friction silicone wheels for maximum grip on the metallic surface.
 - **Offensive Blade:** Front-mounted steel blade designed to lift the opponent and neutralize their traction.
 
 ## Software Architecture
 The robot runs on a real-time **State Machine** written in **C++/AVR**:
-- **Search Mode:** Controlled rotation to scan the environment using the upper sensors.
+- **Search Mode:** Controlled rotation to scan the environment using the Sharp IR sensors.
 - **Attack Mode:** Once an opponent is detected, the robot switches to a **PID-controlled** charge for maximum impact.
-- **Safety Mode:** High-priority interrupts that trigger evasive maneuvers the moment the line sensors detect the white ring border.
+- **Safety Mode:** High-priority interrupts that trigger evasive maneuvers (reverse and spin) the moment the line sensors detect the white ring border.
 
 ## Team & Contribution
 This project was developed in a team of 4 for the **BattleLab Robotica** competition.
