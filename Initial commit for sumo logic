@@ -1,0 +1,58 @@
+/* * BattleLab Robotica - Autonomous Sumo Logic
+ * Core State Machine and Sensor Fusion Implementation
+ */
+
+#include <Arduino.h>
+
+// Pin Definitions (Standard for Arduino Nano / ATmega328P)
+#define LINE_SENSOR_LEFT   A0
+#define LINE_SENSOR_RIGHT  A1
+#define DISTANCE_SENSOR    2
+#define MOTOR_L_PWM        5
+#define MOTOR_R_PWM        6
+
+void setup() {
+    pinMode(LINE_SENSOR_LEFT, INPUT);
+    pinMode(LINE_SENSOR_RIGHT, INPUT);
+    pinMode(DISTANCE_SENSOR, INPUT);
+    
+    // Safety delay required by competition rules
+    delay(5000); 
+}
+
+void loop() {
+    // 1. EMERGENCY: Edge Detection (Line Sensors)
+    // If the white border is detected, immediately retreat and rotate
+    if (analogRead(LINE_SENSOR_LEFT) < 500 || analogRead(LINE_SENSOR_RIGHT) < 500) {
+        driveReverse(200);
+        delay(400);
+        rotate(255);
+    } 
+    // 2. OFFENSIVE: Target Acquisition (Distance Sensor)
+    // If enemy is detected, charge at full speed
+    else if (digitalRead(DISTANCE_SENSOR) == LOW) { 
+        attack(255); 
+    } 
+    // 3. SEARCH: Scan Mode
+    // Rotate slowly to find the opponent
+    else {
+        search(150);
+    }
+}
+
+// Helper functions for Motor Control
+void attack(int speed) {
+    analogWrite(MOTOR_L_PWM, speed);
+    analogWrite(MOTOR_R_PWM, speed);
+}
+
+void search(int speed) {
+    analogWrite(MOTOR_L_PWM, speed);
+    analogWrite(MOTOR_R_PWM, -speed); // Slow rotation
+}
+
+void driveReverse(int speed) {
+    // Simplified logic for reverse movement
+    analogWrite(MOTOR_L_PWM, -speed);
+    analogWrite(MOTOR_R_PWM, -speed);
+}
